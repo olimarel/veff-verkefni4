@@ -1,5 +1,5 @@
 {
-  "name": "vef2-2025-v3-synilausn",
+  "name": "veff-verkefni4",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
