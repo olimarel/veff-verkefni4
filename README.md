@@ -145,4 +145,3 @@ npm test
 npm run test:watch # keyra test í watch mode
 npm run test:coverage # keyra test með coverage í watch mode
 ```
-aaa
