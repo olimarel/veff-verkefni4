@@ -1,4 +1,3 @@
-// components/QuestionDetail.tsx
 import React, { FC, useState } from 'react';
 import { Question, Answer } from '../lib/types';
 
@@ -7,11 +6,11 @@ interface QuestionDetailProps {
 }
 
 const QuestionDetail: FC<QuestionDetailProps> = ({ question }) => {
-  const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
+  // Removed selectedAnswer since it is not used
   const [feedback, setFeedback] = useState<string | null>(null);
 
   const handleAnswer = (answer: Answer) => {
-    setSelectedAnswer(answer);
+    // If you plan to use selectedAnswer later, consider Option B instead.
     if (answer.correct) {
       setFeedback('Correct!');
     } else {

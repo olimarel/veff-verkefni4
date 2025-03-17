@@ -1,4 +1,3 @@
-// pages/admin.tsx
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Input from '../components/Form/Input';
@@ -32,7 +31,7 @@ const AdminPage = () => {
         if (cats.length > 0) {
           setCategoryId(cats[0].id);
         }
-      } catch (error) {
+      } catch {
         setMessage('Failed to fetch categories');
       }
     }
@@ -96,7 +95,7 @@ const AdminPage = () => {
       } else {
         setMessage('Question created successfully!');
       }
-    } catch (err) {
+    } catch {
       setMessage('An unexpected error occurred.');
     }
   };
