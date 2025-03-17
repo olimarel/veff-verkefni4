@@ -4,7 +4,13 @@
   "description": "Lausn á verkefni 3 í vefforritun 2 2025.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "db:push": "cd backend && npx prisma db push",
+    "db:seed": "cd backend && npx prisma db seed",
+    "db:init": "npm run db:push && npm run db:seed",
+    "setup": "npm run install:all && npm run db:init",
     "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev -- -p 3001\""
   },
   "repository": {
