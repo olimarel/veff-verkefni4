@@ -1,6 +1,8 @@
 // pages/admin.tsx
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
+import Input from '../components/Form/Input';
+import Button from '../components/Form/Button';
 import { QuestionToCreate, Category } from '../lib/types';
 
 const AdminPage = () => {
@@ -25,7 +27,6 @@ const AdminPage = () => {
           throw new Error('Failed to fetch categories');
         }
         const data = await res.json();
-        // Assuming your API returns an object with a "data" key containing an array of categories.
         const cats = data.data || data;
         setCategories(cats);
         if (cats.length > 0) {
@@ -52,18 +53,18 @@ const AdminPage = () => {
     e.preventDefault();
     setMessage(null);
     setValidationErrors([]);
-  
+
     if (categoryId === null) {
       setMessage('Please select a category.');
       return;
     }
-  
+
     const payload: QuestionToCreate = {
       text,
       categoryId,
       answers,
     };
-  
+
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/questions`,
@@ -73,11 +74,10 @@ const AdminPage = () => {
           body: JSON.stringify(payload),
         }
       );
-  
+
       if (!res.ok) {
         const errorData = await res.json();
         console.log('Error response:', errorData);
-        // Check if the error object has an "issues" array
         if (
           errorData.error &&
           errorData.error.issues &&
@@ -100,49 +100,46 @@ const AdminPage = () => {
       setMessage('An unexpected error occurred.');
     }
   };
-  
 
   return (
     <Layout>
       <h2>Create a New Question</h2>
       {message && <p>{message}</p>}
       {validationErrors.length > 0 && (
-        <div>
-          <ul>
-            {validationErrors.map((err, index) => (
-              <li key={index}>{err}</li>
-            ))}
-          </ul>
-        </div>
+        <ul>
+          {validationErrors.map((err, index) => (
+            <li key={index}>{err}</li>
+          ))}
+        </ul>
       )}
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Question Text:</label>
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Category:</label>
-          <select
-            value={categoryId ?? ''}
-            onChange={(e) => setCategoryId(parseInt(e.target.value))}
-            required
-          >
-            {categories.map((cat) => (
-              <option key={cat.id} value={cat.id}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
+        <Input
+          label="Question Text:"
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          required
+        />
+        <div style={{ marginBottom: '1rem' }}>
+          <label>
+            Category:
+            <select
+              value={categoryId ?? ''}
+              onChange={(e) => setCategoryId(parseInt(e.target.value))}
+              required
+            >
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
         {answers.map((ans, index) => (
-          <div key={index}>
-            <label>Answer {index + 1}:</label>
-            <input
+          <div key={index} style={{ marginBottom: '1rem' }}>
+            <Input
+              label={`Answer ${index + 1}:`}
               type="text"
               value={ans.text}
               onChange={(e) => handleAnswerChange(index, 'text', e.target.value)}
@@ -160,7 +157,7 @@ const AdminPage = () => {
             </label>
           </div>
         ))}
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </form>
     </Layout>
   );
