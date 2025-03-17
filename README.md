@@ -42,3 +42,15 @@ Test skrifuð með vitest. Til að keyra test:
 cd backend/
 npm run test
 ```
+
+## Eslint
+
+Eslint aðeins sett upp fyrir framenda þar sem bakendi var nú þegar til.
+
+Til að keyra:
+
+
+```bash
+cd frontend/
+npm run lint
+```
