@@ -16,7 +16,7 @@ const Layout: FC<LayoutProps> = ({ children }) => (
     </header>
     <main>{children}</main>
     <footer>
-      <p>&copy; 2025 Your Name</p>
+      <p>&copy; 2025 Ólafur Marel Árnason</p>
     </footer>
   </div>
 );
